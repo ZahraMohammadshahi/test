@@ -53,8 +53,8 @@ def add_board(coords, board, active_user):
     board[row][col] = active_user
 
 def current_user(user):
-    if user : return "x"
-    else: return "o"
+    if user == player_1 : return "x"
+    else : return "o"
 
 def is_win(user, board):
     if check_row(user, board) : return True
@@ -94,7 +94,10 @@ def check_col(user, board):
 while turns < 9:                                                                
     active_user = current_user(user)
     board_game(board)
+    # if user == True:
+    print(f"{user} is playing")
     user_input = input("please eneter position 1 to 9 or enter 'q' :")
+   
     if quit(user_input):
         break
     user_input = int(user_input)-1
@@ -104,8 +107,11 @@ while turns < 9:
         continue
     add_board(coords, board, active_user)
     if is_win(active_user, board):
-        print(f"{active_user}, WIN!")
+        print(f"{user}, WIN")
         break
  
     turns += 1
-    user = not user
+    if user == player_1: 
+        user = player_2
+    else:
+        user = player_1
